@@ -5,47 +5,24 @@ import store from "./store";
 import axios from "axios";
 import ElementUI from "element-ui";
 import "nprogress/nprogress.css";
-import echarts from "echarts";
+import xss from "xss";
 import "element-ui/lib/theme-chalk/index.css";
 import "font-awesome/css/font-awesome.css";
-// import Highcharts from "highcharts";
+import common from "./components/Common";
+import errorHandler from './resources/scripts/errorHandler';
 
-Vue.filter("date", function(value) {
-  var value1 = new Date(value);
-  let y = value1.getFullYear();
-  let MM = value1.getMonth() + 1;
-  MM = MM < 10 ? "0" + MM : MM;
-  let d = value1.getDate();
-  d = d < 10 ? "0" + d : d;
-  return y + "-" + MM + "-" + d;
-});
-Vue.filter("datetime", function(value) {
-  var value1 = new Date(value);
-  let y = value1.getFullYear();
-  let MM = value1.getMonth() + 1;
-  MM = MM < 10 ? "0" + MM : MM;
-  let d = value1.getDate();
-  d = d < 10 ? "0" + d : d;
-  let h=value1.getHours();
-  h= h<10?'0'+h:h;
-  let m=value1.getMinutes();
-  m=m<10?'0'+m:m;
-  let s=value1.getSeconds();
-  s=s<10?'0'+s:s;
-  return y + "-" + MM + "-" + d +" "+h+":"+m+":"+s;
-});
 axios.interceptors.response.use(
   (data) => {
     return data;
   },
-  (err) => { 
+  (err) => {
     switch (err.response.status) {
       case 404:
         ElementUI.Message({
           message: "数据请求失败，服务器返回404 Not Found",
           type: "error",
           offset: 80,
-          duration:1000
+          duration: 1000,
         });
         break;
       case 400:
@@ -54,26 +31,26 @@ axios.interceptors.response.use(
             message: err.response.data.msg,
             type: "error",
             offset: 80,
-            duration:1000
+            duration: 1000,
           });
         }
         break;
-        case 403:
-          if (err.response.data && err.response.data.msg) {
-            ElementUI.Message({
-              message: err.response.data.msg,
-              type: "error",
-              offset: 80,
-            });
-          }
-          break;
+      case 403:
+        if (err.response.data && err.response.data.msg) {
+          ElementUI.Message({
+            message: err.response.data.msg,
+            type: "error",
+            offset: 80,
+          });
+        }
+        break;
       default:
         /**统一处理异常，关闭加载提示 */
         ElementUI.Message({
           message: err,
           type: "error",
           offset: 80,
-          duration:1000
+          duration: 1000,
         });
         break;
     }
@@ -87,7 +64,6 @@ axios.interceptors.response.use(
   }
 );
 
-Vue.prototype.$echarts = echarts;
 Vue.config.productionTip = false;
 Vue.prototype.$baseURL = process.env.VUE_APP_SERVER_BASE_API;
 
@@ -95,10 +71,12 @@ if (process.env.NODE_ENV === "serverless") {
   const { mockXHR } = require("../mock/static");
   mockXHR();
 }
+
 Vue.prototype.$axios = axios;
 
-Vue.use(ElementUI);
-import xss from 'xss';
+//注册异常处理函数
+Vue.config.errorHandler=errorHandler;
+
 var options = {
   css: false,
   whiteList: {
@@ -167,14 +145,18 @@ var options = {
     video: ["autoplay", "controls", "loop", "preload", "src", "height", "width"],
   },
 }; // 自定义规则
-for(var o in options.whiteList){
-  options.whiteList[o].push('style');
-} 
-var myxss = new xss.FilterXSS(options); 
-Vue.prototype.$xss =myxss.process.bind(myxss);
+for (var o in options.whiteList) {
+  options.whiteList[o].push("style");
+}
+var myxss=new xss.FilterXSS(options);
+Vue.prototype.$xss = myxss.process.bind(myxss);
 //加载公共组件
-import common from "./components/Common";
+
 Vue.use(common);
+
+Vue.use(ElementUI);
+
+
 new Vue({
   router,
   store,

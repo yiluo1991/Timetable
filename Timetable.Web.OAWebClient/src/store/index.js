@@ -17,9 +17,16 @@ export default new Vuex.Store({
     menu:{},
     permission:{},
     tabs:["/admin"],
-    schoolList:undefined
+    errors:[]
   },
   mutations: {
+    addError(state,obj){
+      if(["local","development","serverless"].indexOf( process.env.NODE_ENV)>-1)  state.errors.push(obj);
+    },
+    clearErrors(state){
+      state.errors.splice(0,state.errors.length);
+    },
+    
     updateStaticTopConfig(state, value) {
       state.config.staticTop = value;
       localStorage.setItem("config", JSON.stringify(state.config));
@@ -57,9 +64,6 @@ export default new Vuex.Store({
         }
       }
       
-    },
-    updateSchoolList(state,value){
-      state.schoolList=value;
     },
     resetTabs(state){
       state.tabs=["/admin"];

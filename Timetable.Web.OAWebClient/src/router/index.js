@@ -11,11 +11,11 @@ const routes = [
   },
   {
     path: "/login",
-    component: () => import("../views/Login.vue"),
+    component: () => import(/*webpackChunkName:"login"*/"../views/Login.vue"),
   },
   {
     path: "/admin",
-    component: () => import("../views/_Layout.vue"),
+    component: () => import(/*webpackChunkName:"layout"*/"../views/_Layout.vue"),
     children: [
       {
         path: "",
@@ -29,133 +29,35 @@ const routes = [
         meta: {
           auth: true,
         },
-        component: () => import("../views/PermissionGroup.vue"),
+        component: () => import(/*webpackChunkName:"permissiongroup"*/"../views/PermissionGroup.vue"),
       },
       {
         path: "permissionline",
         meta: {
           auth: true,
         },
-        component: () => import("../views/PermissionLine.vue"),
+        component: () => import(/*webpackChunkName:"permissionline"*/"../views/PermissionLine.vue"),
       },
       {
         path: "role",
         meta: {
           auth: true,
         },
-        component: () => import("../views/Role.vue"),
+        component: () => import(/*webpackChunkName:"role"*/"../views/Role.vue"),
       },
       {
         path: "employee",
         meta: {
           auth: true,
         },
-        component: () => import("../views/Employee.vue"),
+        component: () => import(/*webpackChunkName:"employee"*/"../views/Employee.vue"),
       },
-      {
-        path: "employeeloginlog",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/EmployeeLoginLog.vue"),
-      },
-      {
-        path: "user",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/User.vue"),
-      },
-      {
-        path: "usergroup",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/UserGroup.vue"),
-      },
-      {
-        path: "userregister",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/UserRegister.vue"),
-      },
-      {
-        path: "userloginlog",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/UserLoginLog.vue"),
-      },
-      {
-        path: "school",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/School.vue"),
-      },
-      {
-        path: "servicepoint",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/ServicePoint.vue"),
-      },
-      {
-        path: "auditsurvey",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/AuditSurvey.vue"),
-      },
-      {
-        path: "survey",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/Survey.vue"),
-      },
-      {
-        path: "tipoff",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/TipOff.vue"),
-      },
-      {
-        path: "tag",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/Tag.vue"),
-      },
-      {
-        path: "template",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/SubjectTemplate.vue"),
-      },
-      {
-        path: "proreport",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/ProReport.vue"),
-      },
-      {
-        path: "proreportpackage",
-        meta: {
-          auth: true,
-        },
-        component: () => import("../views/ProReportPackage.vue"),
-      },
-      { path: "test", meta: { auth: true }, component: () => import("../views/Test") },
+      
     ],
   },
   {
     path: "/*",
-    component: () => import("../views/error_pages/ERROR_404.vue"),
+    component: () => import(/*webpackChunkName:"404"*/"../views/error_pages/ERROR_404.vue"),
   },
 ];
 

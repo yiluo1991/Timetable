@@ -5,12 +5,12 @@
         <ElRow :gutter="14">
           <ElCol :span="5" class="block-outer">
             <div class="block-inner" @click="hasPermission('SV_G') & $router.push('/admin/survey')" :class="{ nav: hasPermission('SV_G') }">
-              <h3>问卷情况</h3>
-              <p class="title">运行中 / 总问卷：</p>
+              <h3>销售情况</h3>
+              <p class="title">未支付 / 总订单：</p>
               <p>
                 <span>{{ info.SubjectSummary.Runing }}</span> 份 / <span>{{ info.SubjectSummary.Total }}</span> 份
               </p>
-              <p class="title">近一个月新增问卷：</p>
+              <p class="title">近一个月新增订单：</p>
               <p>
                 <span>{{ total }}</span> 份
               </p>
@@ -19,11 +19,11 @@
           <ElCol :span="5" class="block-outer">
             <div class="block-inner" @click="hasPermission('AS_G') & $router.push('/admin/auditsurvey')" :class="{ nav: hasPermission('AS_G') }">
               <h3>审核情况</h3>
-              <p class="title">待审核问卷：</p>
+              <p class="title">待审核：</p>
               <p>
                 <span>{{ info.AuditingSummary.AuditingCount }}</span> 份
               </p>
-              <p class="title">已审核问卷：</p>
+              <p class="title">已审核：</p>
               <p>
                 <span>{{ info.AuditingSummary.AuditedCount }}</span> 份
               </p>
@@ -47,12 +47,12 @@
           </ElCol>
            <ElCol :span="5" class="block-outer">
             <div class="block-inner" :class="{ nav: hasPermission('TP_G') }" @click="hasPermission('TP_G') & $router.push('/admin/template')">
-              <h3>模板情况</h3>
-              <p class="title">当前待审核模板：</p>
+              <h3>商品情况</h3>
+              <p class="title">当前待审核商品：</p>
               <p>
                 <span>{{ info.TemplateSummary.AuditingCount }}</span> 份
               </p> 
-              <p class="title">当前已审核模板：</p>
+              <p class="title">当前已审核商品：</p>
               <p>
                 <span>{{ info.TemplateSummary.AuditedCount }}</span> 份
               </p>
@@ -78,7 +78,7 @@
         <el-container style="height:100%">
           <el-header height="42px" style="padding:10px 0 0 0;">
             <el-radio-group v-model="radio" size="small">
-              <el-radio-button label="1">近一个月新增问卷</el-radio-button>
+              <el-radio-button label="1">近一个月新增用户</el-radio-button>
               <el-radio-button label="2">近一个月用户登录</el-radio-button>
             </el-radio-group>
           </el-header>
@@ -150,7 +150,7 @@ export default {
           enabled: false,
         },
         title: {
-          text: "近一个月问卷新增情况",
+          text: "近一个月用户新增情况",
         },
         chart: {
           type: "column",

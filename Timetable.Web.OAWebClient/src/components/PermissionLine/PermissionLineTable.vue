@@ -80,7 +80,7 @@ export default {
     this.reload();
   },
   methods: {
-    rowClass: function ({ row, rowIndex }) {
+    rowClass: function ({ row }) {
       if (row.Id < 0) return "gray-row";
     },
     reload(keyword) {

@@ -289,7 +289,7 @@ export default {
         }
     },
     watch: {
-        isShowSelect(val) {
+        isShowSelect() {
             // 隐藏select自带的下拉框
             this.$refs.select.blur();
         },

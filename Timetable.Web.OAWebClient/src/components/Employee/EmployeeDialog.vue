@@ -177,7 +177,7 @@ computed: {
           }
           var loading = this.$loading({ text: "正在处理请求" });
           this.$axios
-            .post(this.$baseURL + url, this.editData, (data) => {})
+            .post(this.$baseURL + url, this.editData, () => {})
             .then((res) => {
               this.dialogVisible = false;
               if (res.data.success) {

@@ -21,7 +21,14 @@
             <a>{{ menu[$route.path.toLocaleLowerCase()] }}</a>
           </ElBreadcrumb-item>
         </ElBreadcrumb>
-        <div id="layout_tools">
+        <div id="layout_tools"> 
+          <ElTooltip content="打开错误日志" v-if="errors.length>0"> 
+            <el-badge :value="errors.length" class="item"  >
+              <a @click="openErrorLog()">
+                <i style="color:#f00000" class="el-icon-warning-outline"></i>
+              </a>
+            </el-badge>
+          </ElTooltip>
           <ElTooltip :content="config.tabMode ? '关闭多标签页模式' : '启用多标签页模式'">
             <a @click="tabModeChange()">
               <i :class="config.tabMode ? 'el-icon-more' : 'el-icon-more-outline'"></i>
@@ -140,6 +147,7 @@ export default {
     BasicMenu,
   },
   mounted() {
+    
     this.$axios.post(this.$baseURL + "/employee/getemployeeinfo").then((res) => {
       this.userinfo = res.data.data;
     });
@@ -160,7 +168,7 @@ export default {
     ...mapMutations(["updateStaticTopConfig", "updateCollapsedConfig", "updateTabModeConfig", "addTab", "removeTab"]),
     handleCommand: function(cmd) {
       if (cmd == "exit") {
-        this.$axios.post(this.$baseURL + '/login/logout').then(res=>{
+        this.$axios.post(this.$baseURL + '/login/logout').then(()=>{
            location.href = "/app/login";
         })
        
@@ -228,7 +236,7 @@ export default {
     tabRemove(e) {
       var index;
       if (e == this.$route.path.toLocaleLowerCase()) {
-        var index = this.tabs.findIndex((s) => s == e);
+         index = this.tabs.findIndex((s) => s == e);
       }
       this.removeTab(e);
       if (index !== undefined) {
@@ -240,36 +248,39 @@ export default {
       }
     },
     tabCommand(e) {
+      
       var index = this.tabs.findIndex((s) => s == this.$route.path.toLocaleLowerCase());
       switch (e) {
         case "closeleft":
-          for (var i = index - 1; i > 0; i--) {
+          for (let i = index - 1; i > 0; i--) {
             this.removeTab(this.tabs[i]);
           }
-
+    
           //关闭左侧
           break;
         case "closeright":
           //关闭右侧
-          for (var i = this.tabs.length - 1; i > index; i--) {
+          for (let i = this.tabs.length - 1; i > index; i--) {
             this.removeTab(this.tabs[i]);
           }
           break;
         case "closeother":
           //关闭其他
-          for (var i = this.tabs.length - 1; i > index; i--) {
+          for (let i = this.tabs.length - 1; i > index; i--) {
             this.removeTab(this.tabs[i]);
           }
 
-          for (var i = index - 1; i > 0; i--) {
+          for (let i = index - 1; i > 0; i--) {
             this.removeTab(this.tabs[i]);
           }
 
           break;
         case "closeall":
-          for (var i = this.tabs.length - 1; i > 0; i--) {
+          for (let i = this.tabs.length - 1; i > 0; i--) {
             this.removeTab(this.tabs[i]);
           }
+       
+           if(this.$route.path!=this.tabs[0])
           this.$router.push(this.tabs[0]);
         //关闭全部
       }
@@ -291,9 +302,13 @@ export default {
         }
       });
     },
+    openErrorLog(){
+
+
+    }
   },
   computed: {
-    ...mapState(["config", "menu", "tabs", "permission"]),
+    ...mapState(["config", "menu", "tabs", "permission",'errors']),
     keep_alives() {
       return this.tabs.map((s) => s.replace(/\//g, ""));
     },

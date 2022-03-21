@@ -60,7 +60,7 @@ export default {
   },
  
   methods: {
-    onNavmenuSelect: function (index, path, vnode) {
+    onNavmenuSelect: function (index ) {
       if (index != this.$route.path.toLocaleLowerCase())
         this.$router.push(index);
     },

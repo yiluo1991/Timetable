@@ -1,5 +1,5 @@
 <template>
-  <div class=" toolbar" style="overflow: hidden;">
+  <div class=" toolbar" >
     <ElButton v-if="showAddButton" type="success"  icon="el-icon-plus" size="medium" style="margin-right:10px" plain round @click="clickAdd">{{addText}}</ElButton>
 
     <slot name="default">
@@ -13,11 +13,7 @@
     </ElInput>
     
     <ElButton v-if="showRefreshButton" type="primary" style="margin-right:10px;" icon="el-icon-refresh" size="medium"  plain round @click="reload">{{refreshText}}</ElButton>
-     <slot name="append">
-      
-
-    </slot>
-
+   
   </div>
 </template>
 

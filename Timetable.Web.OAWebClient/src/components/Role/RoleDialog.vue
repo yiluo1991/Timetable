@@ -104,7 +104,7 @@ export default {
           }
           var loading = this.$loading({ text: "正在处理请求" });
           this.$axios
-            .post(this.$baseURL + url, this.editRow, (data) => {})
+            .post(this.$baseURL + url, this.editRow, () => {})
             .then((res) => {
               that.dialogVisible = false;
               if (res.data.success) {

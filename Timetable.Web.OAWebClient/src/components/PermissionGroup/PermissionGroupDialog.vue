@@ -155,7 +155,7 @@ export default {
             url = "/permissiongroup/edit";
           }
           this.$axios
-            .post(this.$baseURL + url, this.editData, (data) => {})
+            .post(this.$baseURL + url, this.editData, () => {})
             .then((res) => {
               loading.close();
               if (res.data.success) {

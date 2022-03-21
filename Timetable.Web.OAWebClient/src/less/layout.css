@@ -337,6 +337,13 @@ body {
   height: 50px;
   line-height: 50px;
 }
+#layout #layout_main #layout_main_top #layout_tools .el-badge__content {
+  top: 12px;
+  right: 22px;
+}
+#layout #layout_main #layout_main_top #layout_tools .el-badge {
+  vertical-align: top;
+}
 #layout #layout_main #layout_main_top #layout_tools a {
   font-size: 22px;
   line-height: 50px;
@@ -345,6 +352,9 @@ body {
   -webkit-transition: 0.5s all;
   -moz-transition: 0.5s all;
   transition: 0.5s all;
+  float: none;
+  display: inline-block;
+  vertical-align: top;
 }
 #layout #layout_main #layout_main_top #layout_tools a:hover {
   background: #f7f7f7;

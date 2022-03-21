@@ -77,7 +77,7 @@ export default {
   },
   mounted() {
     window.pJSDom = [];
-    particlesJS("particles", {
+    window.particlesJS("particles", {
       particles: {
         number: {
           value: 90,
@@ -194,7 +194,8 @@ export default {
         background_size: "cover",
       },
     });
-  },
+ 
+ },
   beforeDestroy() {
     window.pJSDom = undefined;
   },
@@ -203,6 +204,7 @@ export default {
       this.$refs.form.validate((isValid) => {
         if (isValid) {
           this.logining = true;
+        
           this.$axios
             .post(this.$baseURL + "/login/userlogin", {
               username: this.info.loginname,
