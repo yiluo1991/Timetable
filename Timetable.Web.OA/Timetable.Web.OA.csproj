@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\debug\netcoreapp3.1\Timetable.Web.OA.xml</DocumentationFile>
+    <OutputPath>bin\debug</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Infrastructure\UserCache\UserCache.cs" />
+    <Compile Remove="Infrastructure\UserCache\UserCacheInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CryptoHelper" Version="3.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.23" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Timetable.DbContext\Timetable.DbContext.csproj" />
+    <ProjectReference Include="..\Timetable.Redis\Timetable.Redis.csproj" />
+    <ProjectReference Include="..\Timetable.Security\Timetable.Security.csproj" />
+    <ProjectReference Include="..\Timetable.Tools\Timetable.Tools.csproj" />
+    <ProjectReference Include="..\TimeTable.Web.CommonViewModel\TimeTable.Web.CommonViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\UserCache\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+
+</Project>

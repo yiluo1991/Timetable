@@ -1,0 +1,337 @@
+﻿--Init 1
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+
+START TRANSACTION;
+
+CREATE TABLE "Channels" (
+    "Id" bigserial NOT NULL,
+    "Key" character varying(64) NULL,
+    "Name_CN" character varying(32) NULL,
+    "Name_EN" character varying(128) NULL,
+    "SEOKeywords_CN" character varying(128) NULL,
+    "SEOKeywords_EN" character varying(512) NULL,
+    "Description_CN" character varying(512) NULL,
+    "Description_EN" character varying(2048) NULL,
+    "ParentId" bigint NULL,
+    "Enable" boolean NOT NULL,
+    "VisibleInArticle" boolean NOT NULL,
+    "HasSpecialUrl" boolean NOT NULL,
+    "SpecialUrl" character varying(256) NULL,
+    "SortNum" integer NOT NULL,
+    CONSTRAINT "PK_Channels" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Channels_Channels_ParentId" FOREIGN KEY ("ParentId") REFERENCES "Channels" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "Colleges" (
+    "Id" bigserial NOT NULL,
+    "Name" character varying(128) NOT NULL,
+    "ContactName" character varying(64) NOT NULL,
+    "ContactPhone" character varying(32) NOT NULL,
+    "Enable" boolean NOT NULL,
+    "Remark" character varying(512) NOT NULL,
+    CONSTRAINT "PK_Colleges" PRIMARY KEY ("Id")
+);
+
+CREATE TABLE "PermissionGroups" (
+    "Id" bigserial NOT NULL,
+    "DisplayName" character varying(128) NOT NULL,
+    "Key" character varying(64) NULL,
+    "ParentId" bigint NULL,
+    "Url" character varying(256) NULL,
+    "Headshot" character varying(256) NULL,
+    "SN" integer NOT NULL,
+    CONSTRAINT "PK_PermissionGroups" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_PermissionGroups_PermissionGroups_ParentId" FOREIGN KEY ("ParentId") REFERENCES "PermissionGroups" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "Roles" (
+    "Id" bigserial NOT NULL,
+    "Name" character varying(32) NULL,
+    "Remark" character varying(128) NULL,
+    CONSTRAINT "PK_Roles" PRIMARY KEY ("Id")
+);
+
+CREATE TABLE "SchoolTerm" (
+    "Id" bigserial NOT NULL,
+    "Year" integer NOT NULL,
+    "Term" integer NOT NULL,
+    "CustomStart" timestamp without time zone NOT NULL,
+    "CustomEnd" timestamp without time zone NOT NULL,
+    "FixedStart" timestamp without time zone NOT NULL,
+    "IsDefault" boolean NOT NULL,
+    CONSTRAINT "PK_SchoolTerm" PRIMARY KEY ("Id")
+);
+
+CREATE TABLE "Teachers" (
+    "IdentityCode" character varying(32) NOT NULL,
+    "SchoolOpenId" character varying(64) NULL,
+    "Password" character varying(128) NULL,
+    "SinglePointHash" character varying(16) NULL,
+    "RealName" character varying(64) NULL,
+    "AvatarUrl" character varying(256) NULL,
+    "Mobile" character varying(16) NULL,
+    "Gender" integer NOT NULL,
+    "Enable" boolean NOT NULL,
+    CONSTRAINT "PK_Teachers" PRIMARY KEY ("IdentityCode")
+);
+
+CREATE TABLE "Departments" (
+    "Id" bigserial NOT NULL,
+    "Name" character varying(128) NOT NULL,
+    "ContactName" character varying(64) NOT NULL,
+    "ContactPhone" character varying(32) NOT NULL,
+    "Enable" boolean NOT NULL,
+    "DepartmentId" bigint NOT NULL,
+    "Remark" character varying(512) NOT NULL,
+    CONSTRAINT "PK_Departments" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Departments_Colleges_DepartmentId" FOREIGN KEY ("DepartmentId") REFERENCES "Colleges" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "PermissionLines" (
+    "Id" bigserial NOT NULL,
+    "Key" character varying(64) NULL,
+    "GroupId" bigint NOT NULL,
+    "DisplayName" character varying(128) NOT NULL,
+    "Url" character varying(256) NULL,
+    "SN" integer NOT NULL,
+    CONSTRAINT "PK_PermissionLines" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_PermissionLines_PermissionGroups_GroupId" FOREIGN KEY ("GroupId") REFERENCES "PermissionGroups" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "AdministrativeClasses" (
+    "Id" bigserial NOT NULL,
+    "CollegeId" bigint NULL,
+    "DepartmentId" bigint NULL,
+    "Grade" integer NOT NULL,
+    "FullName" character varying(128) NOT NULL,
+    "AdministrativeClassState" integer NOT NULL,
+    CONSTRAINT "PK_AdministrativeClasses" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AdministrativeClasses_Colleges_CollegeId" FOREIGN KEY ("CollegeId") REFERENCES "Colleges" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_AdministrativeClasses_Departments_DepartmentId" FOREIGN KEY ("DepartmentId") REFERENCES "Departments" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "Employees" (
+    "Id" bigserial NOT NULL,
+    "LoginName" character varying(128) NOT NULL,
+    "Password" character varying(128) NOT NULL,
+    "Headshot" character varying(256) NULL,
+    "Email" character varying(128) NULL,
+    "RealName" character varying(64) NULL,
+    "Enable" boolean NOT NULL,
+    "Mobile" character varying(16) NULL,
+    "Address" character varying(256) NULL,
+    "DepartmentId" bigint NULL,
+    "CreateTime" timestamp without time zone NOT NULL,
+    "PermissionEndTime" timestamp without time zone NULL,
+    "CreatorId" bigint NULL,
+    "SinglePointHsah" character varying(16) NULL,
+    CONSTRAINT "PK_Employees" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Employees_Departments_DepartmentId" FOREIGN KEY ("DepartmentId") REFERENCES "Departments" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Employees_Employees_CreatorId" FOREIGN KEY ("CreatorId") REFERENCES "Employees" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "Subjects" (
+    "SubjectCode" character varying(32) NOT NULL,
+    "Name" character varying(128) NULL,
+    "CollegeId" bigint NULL,
+    "DepartmentId" bigint NULL,
+    "Enable" boolean NOT NULL,
+    "SubjectType" integer NOT NULL,
+    "SubjectProperty" integer NOT NULL,
+    CONSTRAINT "PK_Subjects" PRIMARY KEY ("SubjectCode"),
+    CONSTRAINT "FK_Subjects_Colleges_CollegeId" FOREIGN KEY ("CollegeId") REFERENCES "Colleges" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Subjects_Departments_DepartmentId" FOREIGN KEY ("DepartmentId") REFERENCES "Departments" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "RolePermissions" (
+    "Id" bigserial NOT NULL,
+    "RoleId" bigint NOT NULL,
+    "PermissionLineId" bigint NOT NULL,
+    CONSTRAINT "PK_RolePermissions" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_RolePermissions_PermissionLines_PermissionLineId" FOREIGN KEY ("PermissionLineId") REFERENCES "PermissionLines" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_RolePermissions_Roles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "Roles" ("Id") ON DELETE CASCADE
+);
+
+CREATE TABLE "AdministrativeClassBackups" (
+    "Id" bigserial NOT NULL,
+    "BackupList" jsonb NOT NULL,
+    "AdminstractiveClassId" bigint NOT NULL,
+    CONSTRAINT "PK_AdministrativeClassBackups" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AdministrativeClassBackups_AdministrativeClasses_Adminstrac~" FOREIGN KEY ("AdminstractiveClassId") REFERENCES "AdministrativeClasses" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "Students" (
+    "IdentityCode" character varying(32) NOT NULL,
+    "SchoolOpenId" character varying(64) NULL,
+    "Password" character varying(128) NULL,
+    "SinglePointHash" character varying(16) NULL,
+    "RealName" character varying(64) NULL,
+    "AvatarUrl" character varying(256) NULL,
+    "Mobile" character varying(16) NULL,
+    "Gender" integer NOT NULL,
+    "CollegeId" bigint NULL,
+    "DepartmentId" bigint NULL,
+    "AdministrativeClassId" bigint NOT NULL,
+    "AdmissionYear" bigint NOT NULL,
+    "StudentState" integer NOT NULL,
+    CONSTRAINT "PK_Students" PRIMARY KEY ("IdentityCode"),
+    CONSTRAINT "FK_Students_AdministrativeClasses_AdministrativeClassId" FOREIGN KEY ("AdministrativeClassId") REFERENCES "AdministrativeClasses" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Students_Colleges_CollegeId" FOREIGN KEY ("CollegeId") REFERENCES "Colleges" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Students_Departments_DepartmentId" FOREIGN KEY ("DepartmentId") REFERENCES "Departments" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "Articles" (
+    "Id" bigserial NOT NULL,
+    "Title_CN" character varying(128) NULL,
+    "Title_EN" character varying(512) NULL,
+    "Author" character varying(128) NULL,
+    "SEOKeywords_CN" character varying(128) NULL,
+    "SEOKeywords_EN" character varying(512) NULL,
+    "Description_CN" character varying(512) NULL,
+    "Description_EN" character varying(2048) NULL,
+    "Enable" boolean NOT NULL,
+    "SortNum" integer NOT NULL,
+    "CreateTime" timestamp without time zone NOT NULL DEFAULT (now()),
+    "ViewCount" bigint NOT NULL,
+    "EmployeeId" bigint NOT NULL,
+    "ChannelId" bigint NOT NULL,
+    "Content_CN" character varying(1048576) NULL,
+    "Content_EN" character varying(1048576) NULL,
+    "Src" character varying(256) NULL,
+    "PublishData" timestamp without time zone NULL,
+    CONSTRAINT "PK_Articles" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Articles_Channels_ChannelId" FOREIGN KEY ("ChannelId") REFERENCES "Channels" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Articles_Employees_EmployeeId" FOREIGN KEY ("EmployeeId") REFERENCES "Employees" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "EmployeeLoginLogs" (
+    "Id" bigserial NOT NULL,
+    "EmployeeId" bigint NOT NULL,
+    "IP" text NULL,
+    "Remark" text NULL,
+    "Success" boolean NOT NULL,
+    "LoginTime" timestamp without time zone NOT NULL,
+    CONSTRAINT "PK_EmployeeLoginLogs" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_EmployeeLoginLogs_Employees_EmployeeId" FOREIGN KEY ("EmployeeId") REFERENCES "Employees" ("Id") ON DELETE CASCADE
+);
+
+CREATE TABLE "EmployeeRoles" (
+    "Id" bigserial NOT NULL,
+    "EmployeeId" bigint NOT NULL,
+    "RoleId" bigint NOT NULL,
+    CONSTRAINT "PK_EmployeeRoles" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_EmployeeRoles_Employees_EmployeeId" FOREIGN KEY ("EmployeeId") REFERENCES "Employees" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_EmployeeRoles_Roles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "Roles" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "Courses" (
+    "Id" bigserial NOT NULL,
+    "SubjectCode" character varying(32) NOT NULL,
+    "CollegeId" bigint NULL,
+    "DepartmentId" bigint NULL,
+    "CourseName" character varying(128) NOT NULL,
+    "TeacherIdentityCode" character varying(32) NOT NULL,
+    "AdministrativeClassId" bigint NULL,
+    "SchoolTermId" bigint NOT NULL,
+    "TimebookJson" jsonb NOT NULL,
+    "AdminstractiveClassBackupId" bigint NULL,
+    CONSTRAINT "PK_Courses" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Courses_AdministrativeClassBackups_AdminstractiveClassBacku~" FOREIGN KEY ("AdminstractiveClassBackupId") REFERENCES "AdministrativeClassBackups" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Courses_AdministrativeClasses_AdministrativeClassId" FOREIGN KEY ("AdministrativeClassId") REFERENCES "AdministrativeClasses" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Courses_Colleges_CollegeId" FOREIGN KEY ("CollegeId") REFERENCES "Colleges" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Courses_Departments_DepartmentId" FOREIGN KEY ("DepartmentId") REFERENCES "Departments" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Courses_SchoolTerm_SchoolTermId" FOREIGN KEY ("SchoolTermId") REFERENCES "SchoolTerm" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Courses_Subjects_SubjectCode" FOREIGN KEY ("SubjectCode") REFERENCES "Subjects" ("SubjectCode") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Courses_Teachers_TeacherIdentityCode" FOREIGN KEY ("TeacherIdentityCode") REFERENCES "Teachers" ("IdentityCode") ON DELETE RESTRICT
+);
+
+CREATE TABLE "CoursePIcks" (
+    "Id" bigserial NOT NULL,
+    "CourseId" bigint NOT NULL,
+    "StudentIdentityCode" character varying(32) NOT NULL,
+    CONSTRAINT "PK_CoursePIcks" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_CoursePIcks_Courses_CourseId" FOREIGN KEY ("CourseId") REFERENCES "Courses" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_CoursePIcks_Students_StudentIdentityCode" FOREIGN KEY ("StudentIdentityCode") REFERENCES "Students" ("IdentityCode") ON DELETE RESTRICT
+);
+
+CREATE INDEX "IX_AdministrativeClassBackups_AdminstractiveClassId" ON "AdministrativeClassBackups" ("AdminstractiveClassId");
+
+CREATE INDEX "IX_AdministrativeClasses_CollegeId" ON "AdministrativeClasses" ("CollegeId");
+
+CREATE INDEX "IX_AdministrativeClasses_DepartmentId" ON "AdministrativeClasses" ("DepartmentId");
+
+CREATE INDEX "IX_Articles_ChannelId" ON "Articles" ("ChannelId");
+
+CREATE INDEX "IX_Articles_EmployeeId" ON "Articles" ("EmployeeId");
+
+CREATE UNIQUE INDEX "IX_Channels_Key" ON "Channels" ("Key");
+
+CREATE INDEX "IX_Channels_ParentId" ON "Channels" ("ParentId");
+
+CREATE INDEX "IX_CoursePIcks_CourseId" ON "CoursePIcks" ("CourseId");
+
+CREATE INDEX "IX_CoursePIcks_StudentIdentityCode" ON "CoursePIcks" ("StudentIdentityCode");
+
+CREATE INDEX "IX_Courses_AdministrativeClassId" ON "Courses" ("AdministrativeClassId");
+
+CREATE INDEX "IX_Courses_AdminstractiveClassBackupId" ON "Courses" ("AdminstractiveClassBackupId");
+
+CREATE INDEX "IX_Courses_CollegeId" ON "Courses" ("CollegeId");
+
+CREATE INDEX "IX_Courses_DepartmentId" ON "Courses" ("DepartmentId");
+
+CREATE INDEX "IX_Courses_SchoolTermId" ON "Courses" ("SchoolTermId");
+
+CREATE INDEX "IX_Courses_SubjectCode" ON "Courses" ("SubjectCode");
+
+CREATE INDEX "IX_Courses_TeacherIdentityCode" ON "Courses" ("TeacherIdentityCode");
+
+CREATE INDEX "IX_Departments_DepartmentId" ON "Departments" ("DepartmentId");
+
+CREATE INDEX "IX_EmployeeLoginLogs_EmployeeId" ON "EmployeeLoginLogs" ("EmployeeId");
+
+CREATE INDEX "IX_EmployeeRoles_EmployeeId" ON "EmployeeRoles" ("EmployeeId");
+
+CREATE INDEX "IX_EmployeeRoles_RoleId" ON "EmployeeRoles" ("RoleId");
+
+CREATE INDEX "IX_Employees_CreatorId" ON "Employees" ("CreatorId");
+
+CREATE INDEX "IX_Employees_DepartmentId" ON "Employees" ("DepartmentId");
+
+CREATE UNIQUE INDEX "IX_Employees_LoginName" ON "Employees" ("LoginName");
+
+CREATE UNIQUE INDEX "IX_PermissionGroups_Key" ON "PermissionGroups" ("Key");
+
+CREATE INDEX "IX_PermissionGroups_ParentId" ON "PermissionGroups" ("ParentId");
+
+CREATE INDEX "IX_PermissionLines_GroupId" ON "PermissionLines" ("GroupId");
+
+CREATE UNIQUE INDEX "IX_PermissionLines_Key" ON "PermissionLines" ("Key");
+
+CREATE INDEX "IX_RolePermissions_PermissionLineId" ON "RolePermissions" ("PermissionLineId");
+
+CREATE INDEX "IX_RolePermissions_RoleId" ON "RolePermissions" ("RoleId");
+
+CREATE INDEX "IX_Students_AdministrativeClassId" ON "Students" ("AdministrativeClassId");
+
+CREATE INDEX "IX_Students_CollegeId" ON "Students" ("CollegeId");
+
+CREATE INDEX "IX_Students_DepartmentId" ON "Students" ("DepartmentId");
+
+CREATE UNIQUE INDEX "IX_Students_SchoolOpenId" ON "Students" ("SchoolOpenId");
+
+CREATE INDEX "IX_Subjects_CollegeId" ON "Subjects" ("CollegeId");
+
+CREATE INDEX "IX_Subjects_DepartmentId" ON "Subjects" ("DepartmentId");
+
+CREATE UNIQUE INDEX "IX_Teachers_SchoolOpenId" ON "Teachers" ("SchoolOpenId");
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20220310034728_Init1', '5.0.14');
+
+COMMIT;
+
