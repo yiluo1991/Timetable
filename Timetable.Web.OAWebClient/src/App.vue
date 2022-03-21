@@ -5,7 +5,9 @@
 </template>
 <script>
 export default { 
- 
+  mounted () {
+    throw new Error(111)
+  }
 }
 </script>
 <style lang="less">
