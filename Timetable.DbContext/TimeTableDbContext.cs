@@ -30,7 +30,7 @@ namespace Timetable.DbContext
             {
                 // var conn = ConfigurationManager.ConnectionStrings["MainConnection"].ConnectionString;
                 //  optionsBuilder.UseNpgsql(SurveyStar.Infrastructure.Security.WebConfigDES.ConfigDES.Decrypt(conn));
-             //   optionsBuilder.UseLazyLoadingProxies().UseNpgsql("Server=127.0.0.1;Port=5432;User Id=postgres;Password=1234;Database=Timetable");
+              // optionsBuilder.UseLazyLoadingProxies().UseNpgsql("Server=127.0.0.1;Port=5432;User Id=postgres;Password=1234;Database=Timetable");
 
               optionsBuilder.UseLazyLoadingProxies().UseNpgsql(Security.WebConfigDES.ConfigDES.Decrypt(ConfigurationManager.ConnectionStrings["MainConnection"].ConnectionString));
             }
@@ -98,6 +98,16 @@ namespace Timetable.DbContext
         public virtual DbSet<EmployeeRole> EmployeeRoles { get; set; }
 
         /// <summary>
+        ///     通知公告数据集
+        /// </summary>
+        public virtual DbSet<Notice> Notices { get; set; }
+
+        /// <summary>
+        ///     问卷调查列表数据集
+        /// </summary>
+        public virtual DbSet<Paper> Papers { get; set; }
+
+        /// <summary>
         ///     权限页数据集
         /// </summary>
         public virtual DbSet<PermissionGroup> PermissionGroups { get; set; }
@@ -153,6 +163,8 @@ namespace Timetable.DbContext
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeLoginLogConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new NoticeConfiguration());
+            modelBuilder.ApplyConfiguration(new PaperConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionGroupConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionLineConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());

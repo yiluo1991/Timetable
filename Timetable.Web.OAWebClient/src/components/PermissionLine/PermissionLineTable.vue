@@ -45,13 +45,7 @@
     ></BasicPaginationBar>
   </div>
 </template>
-<style lang="less">
-.gray-row {
-  td {
-    background: #f9f9f9 !important;
-  }
-}
-</style>
+
 <script>
 export default {
   inject: ["hasPermission"],

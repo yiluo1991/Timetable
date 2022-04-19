@@ -13,7 +13,7 @@ namespace Timetable.DbContext.Models.Configurations
             builder.ToTable("CoursePIcks");
             builder.HasKey("Id");
 
-            builder.HasOne(s => s.Course).WithMany(s => s.CoursePicks).HasForeignKey(s => s.CourseId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(s => s.Course).WithMany(s => s.CoursePicks).HasForeignKey(s => s.CourseId).IsRequired().OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(s => s.Student).WithMany(s => s.CoursePicks).HasForeignKey(s => s.StudentIdentityCode).IsRequired().OnDelete(DeleteBehavior.Restrict);
         }
     }

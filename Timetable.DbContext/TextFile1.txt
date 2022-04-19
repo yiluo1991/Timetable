@@ -335,3 +335,78 @@ VALUES ('20220310034728_Init1', '5.0.14');
 
 COMMIT;
 
+
+
+-- init2
+
+START TRANSACTION;
+
+ALTER TABLE "CoursePIcks" DROP CONSTRAINT "FK_CoursePIcks_Courses_CourseId";
+
+ALTER TABLE "CoursePIcks" ADD CONSTRAINT "FK_CoursePIcks_Courses_CourseId" FOREIGN KEY ("CourseId") REFERENCES "Courses" ("Id") ON DELETE CASCADE;
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20220322034450_Init2', '5.0.14');
+
+COMMIT;
+
+
+
+--Init3
+START TRANSACTION;
+
+ALTER TABLE "Departments" DROP CONSTRAINT "FK_Departments_Colleges_DepartmentId";
+
+ALTER TABLE "Departments" RENAME COLUMN "DepartmentId" TO "CollegeId";
+
+ALTER INDEX "IX_Departments_DepartmentId" RENAME TO "IX_Departments_CollegeId";
+
+ALTER TABLE "Departments" ADD CONSTRAINT "FK_Departments_Colleges_CollegeId" FOREIGN KEY ("CollegeId") REFERENCES "Colleges" ("Id") ON DELETE RESTRICT;
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20220324020019_Init3', '5.0.14');
+
+COMMIT;
+
+
+--Init4
+START TRANSACTION;
+
+ALTER TABLE "Teachers" ADD "CreateTime" timestamp without time zone NOT NULL DEFAULT TIMESTAMP '0001-01-01 00:00:00';
+
+ALTER TABLE "Students" ADD "CreateTime" timestamp without time zone NOT NULL DEFAULT TIMESTAMP '0001-01-01 00:00:00';
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20220325010907_Init4', '5.0.14');
+
+COMMIT;
+
+--Init5
+START TRANSACTION;
+
+ALTER TABLE "Courses" ADD "Address" character varying(128) NOT NULL DEFAULT '';
+
+CREATE TABLE "Notices" (
+    "Id" bigserial NOT NULL,
+    "SN" integer NOT NULL,
+    "Title" character varying(256) NOT NULL,
+    "Enable" boolean NOT NULL,
+    "Content" character varying(4096) NOT NULL,
+    "CreateTime" timestamp without time zone NOT NULL,
+    CONSTRAINT "PK_Notices" PRIMARY KEY ("Id")
+);
+
+CREATE TABLE "Papers" (
+    "Id" bigserial NOT NULL,
+    "SN" integer NOT NULL,
+    "Title" character varying(256) NOT NULL,
+    "Enable" boolean NOT NULL,
+    "Url" character varying(512) NOT NULL,
+    CONSTRAINT "PK_Papers" PRIMARY KEY ("Id")
+);
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20220409064220_Init5', '5.0.14');
+
+COMMIT;
+

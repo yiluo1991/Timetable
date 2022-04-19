@@ -1,0 +1,158 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				"navigationStyle": "custom",
+				"navigationBarTitleText":"智慧课表"
+			}
+		} ,{
+		    "path" : "pages/login/login",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    } 
+		}
+        ,{
+            "path" : "pages/mine/mine",
+            "style" :                                                                                    
+            { 
+                "enablePullDownRefresh": false,
+				"navigationBarTitleText":"用户中心",
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/term/term",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/noticelist/noticelist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"navigationBarTitleText":"通知公告"
+            }
+            
+        }
+        ,{
+            "path" : "pages/paperlist/paperlist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"navigationBarTitleText":"问卷调查"
+            }
+            
+        },{
+            "path" : "pages/web/web",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+             
+        }
+        ,{
+            "path" : "pages/password/password",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mycourse/mycourse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/week/week",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"navigationBarTitleText":"本周课程"
+            }
+            
+        }
+        ,{
+            "path" : "pages/search/search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/combosearch/combosearch",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/week2/week2",
+            "style" :                                                                                    
+            { 
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"navigationBarTitleText":"周课表"
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	
+	"tabBar": {
+		"backgroundColor":"#fff",
+		"color": "#707070",
+		"borderStyle":"black", 
+		"selectedColor": "#4d8cce",
+		"list": [{
+				"text": "首页",
+				"pagePath": "pages/index/index",
+				"selectedIconPath": "static/icon1-active.png",
+				"iconPath": "static/icon1.png"
+			},
+			 
+			{
+				"text": "我的",
+				"pagePath": "pages/mine/mine",
+				"selectedIconPath": "static/icon2-active.png",
+				"iconPath": "static/icon2.png"
+			}
+		]
+	}
+}

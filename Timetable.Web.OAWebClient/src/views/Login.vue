@@ -215,7 +215,7 @@ export default {
                 if (this.$route.query.returnUrl) {
                   this.$router.push(this.$route.query.returnUrl);
                 } else {
-                  this.$router.push("/admin");
+                  this.$router.push("/admin/schoolterm");
                 }
               } else {
                 this.$message({

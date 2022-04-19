@@ -48,6 +48,7 @@ namespace Timetable.DbContext.Models
         /// </summary>
         public Gender Gender { get; set; }
 
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         ///     启用，不影响已有课和已选课

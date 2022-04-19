@@ -258,6 +258,11 @@ namespace Timetable.DbContext.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
                     b.Property<long?>("AdministrativeClassId")
                         .HasColumnType("bigint");
 
@@ -338,6 +343,9 @@ namespace Timetable.DbContext.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
+                    b.Property<long>("CollegeId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("ContactName")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -347,9 +355,6 @@ namespace Timetable.DbContext.Migrations
                         .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
-
-                    b.Property<long>("DepartmentId")
-                        .HasColumnType("bigint");
 
                     b.Property<bool>("Enable")
                         .HasColumnType("boolean");
@@ -366,7 +371,7 @@ namespace Timetable.DbContext.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("CollegeId");
 
                     b.ToTable("Departments");
                 });
@@ -488,6 +493,65 @@ namespace Timetable.DbContext.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("EmployeeRoles");
+                });
+
+            modelBuilder.Entity("Timetable.DbContext.Models.Notice", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(4096)
+                        .HasColumnType("character varying(4096)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Enable")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("SN")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notices");
+                });
+
+            modelBuilder.Entity("Timetable.DbContext.Models.Paper", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+
+                    b.Property<bool>("Enable")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("SN")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Papers");
                 });
 
             modelBuilder.Entity("Timetable.DbContext.Models.PermissionGroup", b =>
@@ -657,6 +721,9 @@ namespace Timetable.DbContext.Migrations
                     b.Property<long?>("CollegeId")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<long?>("DepartmentId")
                         .HasColumnType("bigint");
 
@@ -743,6 +810,9 @@ namespace Timetable.DbContext.Migrations
                     b.Property<string>("AvatarUrl")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("Enable")
                         .HasColumnType("boolean");
@@ -895,7 +965,7 @@ namespace Timetable.DbContext.Migrations
                     b.HasOne("Timetable.DbContext.Models.Course", "Course")
                         .WithMany("CoursePicks")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Timetable.DbContext.Models.Student", "Student")
@@ -913,7 +983,7 @@ namespace Timetable.DbContext.Migrations
                 {
                     b.HasOne("Timetable.DbContext.Models.College", "College")
                         .WithMany("Departments")
-                        .HasForeignKey("DepartmentId")
+                        .HasForeignKey("CollegeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

@@ -9,6 +9,13 @@ export default {
 }
 </script>
 <style lang="less">
+.gray-row {
+  td {
+    background: #f9f9f9 !important;
+  }
+}
+</style>
+<style lang="less">
 .el-upload-list__item{
   transition:none!important;
 }

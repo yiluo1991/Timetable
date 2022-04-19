@@ -51,8 +51,91 @@ const routes = [
           auth: true,
         },
         component: () => import(/*webpackChunkName:"employee"*/"../views/Employee.vue"),
+      },  {
+        path: "employeeloginlog",
+        meta: {
+          auth: true,
+        },
+        component: () => import("../views/EmployeeLoginLog.vue"),
       },
-      
+
+      {
+        path:"schoolterm",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/SchoolTerm.vue")
+      },
+      {
+        path:"collegedepartment",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/CollegeDepartment.vue")
+      },
+      {
+        path:"subject",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/Subject.vue")
+      },
+      {
+        path:"teacher",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/Teacher.vue")
+      },
+      {
+        path:"administrativeclass",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/AdministrativeClass.vue")
+      },
+      {
+        path:"student",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/Student.vue")
+      },
+      {
+        path:"course",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/Course.vue")
+      },
+      {
+        path:"allcourse",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/AllCourse.vue")
+      },
+      {
+        path:"coursepick",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/CoursePick.vue")
+      },
+      {
+        path:"paper",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/Paper.vue")
+      },
+      {
+        path:"notice",
+        meta:{
+          auth:true
+        },
+        component:()=>import("../views/Notice.vue")
+      },
     ],
   },
   {

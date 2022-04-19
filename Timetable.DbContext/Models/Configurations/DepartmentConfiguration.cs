@@ -18,7 +18,7 @@ namespace Timetable.DbContext.Models.Configurations
             builder.Property(t => t.ContactPhone).HasMaxLength(32).IsRequired();
 
 
-            builder.HasOne(t => t.College).WithMany(t => t.Departments).HasForeignKey(t => t.DepartmentId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(t => t.College).WithMany(t => t.Departments).HasForeignKey(t => t.CollegeId).IsRequired().OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

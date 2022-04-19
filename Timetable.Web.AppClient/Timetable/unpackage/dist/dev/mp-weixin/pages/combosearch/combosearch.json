@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "cu-custom": "/components/cu-custom/cu-custom",
+    "cu-loading": "/components/cu-loading/cu-loading"
+  }
+}

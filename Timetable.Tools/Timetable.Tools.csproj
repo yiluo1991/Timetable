@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Timetable.DbContext\Timetable.DbContext.csproj" />
+    <ProjectReference Include="..\Timetable.Redis\Timetable.Redis.csproj" />
+    <ProjectReference Include="..\Timetable.Security\Timetable.Security.csproj" />
   </ItemGroup>
 
 </Project>

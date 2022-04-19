@@ -1,0 +1,1 @@
+<view class="{{['cu-load','text-gray','margin-bottom-sm',!noMore?loading?'loading':'standby':'over']}}"></view>

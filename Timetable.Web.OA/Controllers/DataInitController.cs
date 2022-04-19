@@ -264,9 +264,468 @@ namespace Timetable.Web.OA.Controllers
 
                }
                     };
+
+
+                    var pg3 = new PermissionGroup
+                    {
+
+                        DisplayName = "学年管理",
+                        Headshot = "el-icon-date",
+                        SN = 4,
+                        Url = "/admin/schoolterm",
+                        PermissionLines = new List<PermissionLine>{
+                            new PermissionLine{
+                                DisplayName="获取学年列表",
+                                Url="/api/schoolterm/list",
+                                Key="ST_G",
+                                SN=1
+                            },
+                             new PermissionLine{
+                                DisplayName="添加学年",
+                                Url="/api/schoolterm/add",
+                                Key="ST_A",
+                                SN=2
+                            },
+                              new PermissionLine{
+                                DisplayName="清空学年排课和选课信息",
+                                Url="/api/schoolterm/clear",
+                                Key="ST_C",
+                                SN=3
+                            },
+                               new PermissionLine{
+                                DisplayName="删除学年信息",
+                                Url="/api/schoolterm/delete",
+                                Key="ST_D",
+                                SN=4
+                            },
+                                  new PermissionLine{
+                                DisplayName="设为当前学期",
+                                Url="/api/schoolterm/setdefault",
+                                Key="ST_S",
+                                SN=5
+                            },
+                        }
+                    };
+
+                    var pg4 = new PermissionGroup
+                    {
+                        DisplayName = "院系管理",
+                        Headshot = "el-icon-school",
+                        SN = 5,
+                        Url = "/admin/collegedepartment",
+                        PermissionLines = new List<PermissionLine>{
+                            new PermissionLine{
+                                DisplayName="获取院系列表列表",
+                                Url="/api/collegedepartment/list",
+                                Key="CD_G",
+                                SN=1
+                            },
+                             new PermissionLine{
+                                DisplayName="添加院系",
+                                Url="/api/collegedepartment/add",
+                                Key="CD_A",
+                                SN=2
+                            },
+                              new PermissionLine{
+                                DisplayName="院系下拉框数据",
+                                Url="/api/collegedepartment/collegecombo",
+                                Key="CD_GC",
+                                SN=3
+                            },
+
+                                  new PermissionLine{
+                                DisplayName="修改院系",
+                                Url="/api/collegedepartment/edit",
+                                Key="CD_M",
+                                SN=4
+                            },
+                        }
+                    };
+
+
+                    var pg5 = new PermissionGroup
+                    {
+                        DisplayName = "科目与课程安排",
+                        Headshot = "el-icon-s-management",
+                        SN = 6,
+                        Children = new List<PermissionGroup> {
+                                new PermissionGroup{
+                                  DisplayName = "科目",
+                                  SN = 1,
+                                  Url = "/admin/subject",
+                                  PermissionLines = new List<PermissionLine>{
+                                        new PermissionLine{
+                                            DisplayName="获取科目",
+                                            Url="/api/subject/list",
+                                            Key="S_G",
+                                            SN=1
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="添加科目",
+                                            Url="/api/subject/add",
+                                            Key="S_A",
+                                            SN=2
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="修改科目",
+                                            Url="/api/subject/edit",
+                                            Key="S_M",
+                                            SN=3
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="删除科目",
+                                            Url="/api/subject/delete",
+                                            Key="S_D",
+                                            SN=4
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="检查科目名",
+                                            Url="/api/subject/checkexist",
+                                            Key="S_C",
+                                            SN=5
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="获取院系下拉框数据",
+                                            Url="/api/collegedepartment/combodata",
+                                            Key="S_GCD",
+                                            SN=6
+                                        }
+                                    }
+                                },
+                                new PermissionGroup{
+                                  DisplayName = "本学期课程安排",
+                                  SN = 2,
+                                  Url = "/admin/course",
+                                  PermissionLines = new List<PermissionLine>{
+                                        new PermissionLine{
+                                            DisplayName="获取本学期列表",
+                                            Url="/api/course/currentlist",
+                                            Key="C_GC",
+                                            SN=1
+                                        },
+
+                                        new PermissionLine{
+                                            DisplayName="添加课程安排",
+                                            Url="/api/course/add",
+                                            Key="C_A",
+                                            SN=2
+                                        },
+
+                                        new PermissionLine{
+                                            DisplayName="删除科目",
+                                            Url="/api/course/delete",
+                                            Key="C_D",
+                                            SN=3
+                                        },
+                                         new PermissionLine{
+                                            DisplayName="获取可用科目列表",
+                                            Url="/api/subject/enablelist",
+                                            Key="C_GS",
+                                            SN=4
+                                        },
+                                          new PermissionLine{
+                                            DisplayName="获取可用教师列表",
+                                            Url="/api/teacher/enablelist",
+                                            Key="C_GT",
+                                            SN=5
+                                        },
+                                            new PermissionLine{
+                                            DisplayName="获取可用班级",
+                                            Url="/api/administrativeclass/currentlist",
+                                            Key="C_GAC",
+                                            SN=6
+                                        },
+                                             new PermissionLine{
+                                            DisplayName="获取学期信息",
+                                            Url="/api/schoolterm/getcurrentterm",
+                                            Key="C_GCT",
+                                            SN=7
+                                        },
+                                    }
+                                },
+                               new PermissionGroup{
+                                  DisplayName = "全部课程安排",
+                                  SN = 3,
+                                  Url = "/admin/allcourse",
+                                  PermissionLines = new List<PermissionLine>{
+                                        new PermissionLine{
+                                            DisplayName="获取列表",
+                                            Url="/api/course/alllist",
+                                            Key="C_GA",
+                                            SN=1
+                                        }
+
+
+                                    }
+                                },
+
+                        }
+
+                    };
+
+                    var pg6 = new PermissionGroup
+                    {
+                        DisplayName = "教师和学生账号",
+                        Headshot = "el-icon-s-custom",
+                        SN = 7,
+                        Children = new List<PermissionGroup> {
+                                new PermissionGroup{
+                                  DisplayName = "教师账号管理",
+                                  SN = 1,
+                                  Url = "/admin/teacher",
+                                  PermissionLines = new List<PermissionLine>{
+                                        new PermissionLine{
+                                            DisplayName="获取教师账号列表",
+                                            Url="/api/teacher/list",
+                                            Key="T_G",
+                                            SN=1
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="添加教师账号",
+                                            Url="/api/teacher/add",
+                                            Key="T_A",
+                                            SN=2
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="修改教师账号",
+                                            Url="/api/teacher/edit",
+                                            Key="T_M",
+                                            SN=3
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="删除教师账号",
+                                            Url="/api/teacher/delete",
+                                            Key="T_D",
+                                            SN=4
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="检查教师账号",
+                                            Url="/api/teacher/checkexist",
+                                            Key="T_C",
+                                            SN=5
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="重置教师密码",
+                                            Url="/api/teacher/resetpassword",
+                                            Key="T_R",
+                                            SN=6
+                                        }
+                                    }
+                                },
+                                  new PermissionGroup{
+                                  DisplayName = "班级管理",
+                                  SN = 2,
+                                  Url = "/admin/administrativeclass",
+                                  PermissionLines = new List<PermissionLine>{
+                                        new PermissionLine{
+                                            DisplayName="获取班级列表",
+                                            Url="/api/administrativeclass/list",
+                                            Key="AC_G",
+                                            SN=1
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="添加班级",
+                                            Url="/api/administrativeclass/add",
+                                            Key="AC_A",
+                                            SN=2
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="修改班级",
+                                            Url="/api/administrativeclass/edit",
+                                            Key="AC_M",
+                                            SN=3
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="删除班级",
+                                            Url="/api/administrativeclass/delete",
+                                            Key="AC_D",
+                                            SN=4
+                                        },
+                                          new PermissionLine{
+                                            DisplayName="获取院系下拉框数据",
+                                            Url="/api/collegedepartment/combodata",
+                                            Key="AC_GCD",
+                                            SN=5
+                                        }
+                                    }
+                                },
+                                   new PermissionGroup{
+                                  DisplayName = "学生账号管理",
+                                  SN = 3,
+                                  Url = "/admin/student",
+                                  PermissionLines = new List<PermissionLine>{
+                                        new PermissionLine{
+                                            DisplayName="获取学生账号列表",
+                                            Url="/api/student/list",
+                                            Key="SU_G",
+                                            SN=1
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="添加学生账号",
+                                            Url="/api/student/add",
+                                            Key="SU_A",
+                                            SN=2
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="修改学生账号",
+                                            Url="/api/student/edit",
+                                            Key="SU_M",
+                                            SN=3
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="删除学生账号",
+                                            Url="/api/student/delete",
+                                            Key="SU_D",
+                                            SN=4
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="检查学生账号",
+                                            Url="/api/student/checkexist",
+                                            Key="SU_C",
+                                            SN=5
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="重置学生密码",
+                                            Url="/api/student/resetpassword",
+                                            Key="SU_R",
+                                            SN=6
+                                        },
+                                            new PermissionLine{
+                                            DisplayName="获取班级数据",
+                                            Url="/api/administrativeclass/list",
+                                            Key="SU_GAC",
+                                            SN=7
+                                        }
+                                    }
+                                },
+
+                        }
+
+                    };
+                    var pg7 = new PermissionGroup
+                    {
+                        DisplayName = "学生选课信息",
+                        Headshot = "el-icon-s-claim",
+                        SN = 8,
+                        Url = "/admin/coursepick",
+                        PermissionLines = new List<PermissionLine>{
+                            new PermissionLine{
+                                DisplayName="列表",
+                                Url="/api/coursepick/list",
+                                Key="CP_G",
+                                SN=1
+                            },
+                             new PermissionLine{
+                                DisplayName="添加",
+                                Url="/api/coursepick/add",
+                                Key="CP_A",
+                                SN=2
+                            }, 
+                            new PermissionLine{
+                                DisplayName="删除",
+                                Url="/api/coursepick/delete",
+                                Key="CP_D",
+                                SN=3
+                            },
+                             new PermissionLine{
+                                DisplayName="获取学生信息",
+                                Url="/api/student/list",
+                                Key="CP_GS",
+                                SN=4
+                            },
+                               new PermissionLine{
+                                DisplayName="获取课程信息",
+                                Url="/api/course/alllist",
+                                Key="CP_GC",
+                                SN=5
+                            },
+                        }
+                    };
+
+                    var pg8 = new PermissionGroup
+                    {
+                        DisplayName = "小程序公告和问卷",
+                        Headshot = "el-icon-bell",
+                        SN = 9,
+                        Children = new List<PermissionGroup> {
+                                new PermissionGroup{
+                                  DisplayName = "通知公告管理",
+                                  SN = 1,
+                                  Url = "/admin/notice",
+                                  PermissionLines = new List<PermissionLine>{
+                                        new PermissionLine{
+                                            DisplayName="获取列表",
+                                            Url="/api/notice/list",
+                                            Key="N_G",
+                                            SN=1
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="添加公告",
+                                            Url="/api/notice/add",
+                                            Key="N_A",
+                                            SN=2
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="修改",
+                                            Url="/api/notice/edit",
+                                            Key="N_M",
+                                            SN=3
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="删除",
+                                            Url="/api/notice/delete",
+                                            Key="N_D",
+                                            SN=4
+                                        }
+                                      
+                                    }
+                                },
+                                  new PermissionGroup{
+                                  DisplayName = "问卷列表管理",
+                                  SN = 2,
+                                  Url = "/admin/paper",
+                                  PermissionLines = new List<PermissionLine>{
+                                        new PermissionLine{
+                                            DisplayName="获取列表",
+                                            Url="/api/paper/list",
+                                            Key="P_G",
+                                            SN=1
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="添加",
+                                            Url="/api/paper/add",
+                                            Key="P_A",
+                                            SN=2
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="修改",
+                                            Url="/api/paper/edit",
+                                            Key="P_M",
+                                            SN=3
+                                        },
+                                        new PermissionLine{
+                                            DisplayName="删除",
+                                            Url="/api/paper/delete",
+                                            Key="P_D",
+                                            SN=4
+                                        },
+                                       
+                                    }
+                                },
+                               
+
+                        }
+
+                    };
                     ctx.PermissionGroups.Add(pg0);
                     ctx.PermissionGroups.Add(pg1);
                     ctx.PermissionGroups.Add(pg2);
+                    ctx.PermissionGroups.Add(pg3);
+                    ctx.PermissionGroups.Add(pg4);
+                    ctx.PermissionGroups.Add(pg5);
+                    ctx.PermissionGroups.Add(pg6);
+                    ctx.PermissionGroups.Add(pg7);
+                    ctx.PermissionGroups.Add(pg8);
                     ctx.SaveChanges();
                     Role adminRole = new Role
                     {
@@ -311,11 +770,6 @@ namespace Timetable.Web.OA.Controllers
                 }
             }
         }
-        [HttpGet("[action]")]
-        public string test()
-        {
 
-            return Crypto.HashPassword("admin123456"); 
-        }
     }
 }

@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/mine/mine",
+    "pages/term/term",
+    "pages/noticelist/noticelist",
+    "pages/paperlist/paperlist",
+    "pages/web/web",
+    "pages/password/password",
+    "pages/mycourse/mycourse",
+    "pages/week/week",
+    "pages/search/search",
+    "pages/combosearch/combosearch",
+    "pages/week2/week2"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "color": "#707070",
+    "borderStyle": "black",
+    "selectedColor": "#4d8cce",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "selectedIconPath": "static/icon1-active.png",
+        "iconPath": "static/icon1.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/mine",
+        "selectedIconPath": "static/icon2-active.png",
+        "iconPath": "static/icon2.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 60000
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

@@ -59,6 +59,10 @@ export default {
     },
      search(){
        this.$emit("search",this.keyword)
+    },
+    emptyKeyword(){
+      this.keyword='';
+      this.$emit("search",this.keyword)
     }
   },
   data () {

@@ -35,7 +35,7 @@ namespace Timetable.DbContext.Models
         /// <summary>
         ///     系所属学院
         /// </summary>
-        public long DepartmentId { get; set; }
+        public long CollegeId { get; set; }
          
         /// <summary>
         ///     备注

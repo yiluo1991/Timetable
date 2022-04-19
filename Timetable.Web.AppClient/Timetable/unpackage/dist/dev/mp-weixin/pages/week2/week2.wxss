@@ -1,0 +1,13 @@
+.weektable .rotate {
+  position: absolute;
+}
+.changebutton.r {
+  position: absolute;
+  top: 10rpx;
+  left: 2rpx;
+  z-index: 99999;
+  text-align: center;
+  -webkit-transform: rotateZ(-90deg);
+          transform: rotateZ(-90deg);
+}
+

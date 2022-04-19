@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "周课表",
+  "usingComponents": {
+    "cu-custom": "/components/cu-custom/cu-custom",
+    "mp-html": "/uni_modules/mp-html/components/mp-html/mp-html"
+  }
+}

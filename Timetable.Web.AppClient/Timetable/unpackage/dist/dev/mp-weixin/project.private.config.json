@@ -1,0 +1,83 @@
+{
+  "setting": {
+    "compileHotReLoad": false,
+    "urlCheck": false
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/term/term",
+          "pathName": "pages/term/term",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/noticelist/noticelist",
+          "pathName": "pages/noticelist/noticelist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/paperlist/paperlist",
+          "pathName": "pages/paperlist/paperlist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/password/password",
+          "pathName": "pages/password/password",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mycourse/mycourse",
+          "pathName": "pages/mycourse/mycourse",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/week/week",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/search/search",
+          "query": "type=course",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/combosearch/combosearch",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/week2/week2",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  },
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html"
+}

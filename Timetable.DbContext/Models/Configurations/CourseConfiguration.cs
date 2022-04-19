@@ -13,7 +13,7 @@ namespace Timetable.DbContext.Models.Configurations
             builder.ToTable("Courses");
             builder.HasKey(t => t.Id);
             builder.Property(t => t.CourseName).IsRequired().HasMaxLength(128);
-
+            builder.Property(t => t.Address).IsRequired().HasMaxLength(128);
             builder.HasOne(t => t.AdminstractiveClassBackup).WithMany(s => s.Courses).HasForeignKey(t => t.AdminstractiveClassBackupId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(t => t.Subject).WithMany(s => s.Courses).IsRequired().HasForeignKey(s => s.SubjectCode).OnDelete(DeleteBehavior.Restrict);

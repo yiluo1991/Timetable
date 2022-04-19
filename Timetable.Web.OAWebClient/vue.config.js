@@ -1,4 +1,4 @@
-const WebpackBar = require('webpackbar');
+const WebpackBar = require("webpackbar");
 const path = require("path");
 const Webpack = require("webpack");
 
@@ -7,7 +7,6 @@ function resolve(dir) {
 }
 function mockServer() {
   if (process.env.NODE_ENV === "local") {
-
     const mockServer = require("./mock/mock-server.js");
     return mockServer;
   } else {
@@ -15,34 +14,32 @@ function mockServer() {
   }
 }
 module.exports = {
-  publicPath:'/app',
+  publicPath: "/app",
 
   //是否生成map
-  productionSourceMap:false,
+  productionSourceMap: false,
   devServer: {
     open: true,
     hot: true,
-    openPage: 'login',
+    openPage: "login",
     port: 8001,
-    proxy:{
-      '/api': {
-        target: 'http://192.168.6.29:8888',  
+    proxy: {
+      "/api": {
+        target: "http://localhost:50023",
         changeOrigin: true,
-        timeout:700000
+        timeout: 700000,
+      },
+      "/upload": {
+        target: "http://localhost:50023",
+        changeOrigin: true,
+      },
     },
-    '/upload':{
-      target: 'http://192.168.6.29:8888',  
-      changeOrigin: true
-    }
-    },
-    before: mockServer() 
+    before: mockServer(),
   },
   chainWebpack(config) {
     config.when(process.env.NODE_ENV !== "development", (config) => {
-
       config.performance.set("hints", false);
-      config.devtool("none");
-
+      config.devtool("none"); 
       config.optimization.splitChunks({
         chunks: "all",
         cacheGroups: {
@@ -71,13 +68,21 @@ module.exports = {
       config
         .plugin("banner")
         .use(Webpack.BannerPlugin, [
-          `基于AdminUI构建\n厦门励航软件开发有限公司`+ new Date(),
-        ])
-        .end();
+          `基于AdminUI构建\n厦门励航软件开发有限公司` + new Date(),
+        ]).end()
+       
+
+     
+    
+    });
+    config.plugin("html").tap((args) => {
+      console.log(args[0]);
+      args[0].title = "课表后台管理系统";
+      return args;
     });
   },
   configureWebpack(config) {
-    var logo=`  ////////////////////////////////////////////////////////////////////  
+    var logo = `  ////////////////////////////////////////////////////////////////////  
     //                          _ooOoo_                               //  
     //                         o8888888o                              //  
     //                         88" . "88                              //  
@@ -103,9 +108,9 @@ module.exports = {
     return {
       plugins: [
         new WebpackBar({
-          name: logo+`adminui编译中，模式:${process.env.NODE_ENV}`,
+          name: logo + `adminui编译中，模式:${process.env.NODE_ENV}`,
         }),
       ],
     };
-  }
-}
+  },
+};

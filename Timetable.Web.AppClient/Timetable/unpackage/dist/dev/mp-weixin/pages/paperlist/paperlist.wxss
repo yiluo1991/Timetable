@@ -1,0 +1,21 @@
+.paper {
+  margin: 20rpx;
+  color: #666;
+  background: #fff;
+  padding: 20rpx;
+  border-radius: 15rpx;
+  align-items: center ;
+  align-content: center;
+  display: flex;
+}
+.paper .papertitle {
+  margin: 20rpx 0;
+  flex-grow: 1;
+}
+.paper::after {
+  content: '\e6a3';
+  font-family: "cuIcon";
+  font-size: inherit;
+  font-style: normal;
+}
+

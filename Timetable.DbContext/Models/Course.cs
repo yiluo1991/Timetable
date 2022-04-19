@@ -47,13 +47,15 @@ namespace Timetable.DbContext.Models
         ///     上课时间Json
         /// </summary>
         public JsonElement TimebookJson { get; set; }
+ 
 
         /// <summary>
         ///     班级人员备份Id，用于学期结束时备份班级的课堂人员
         /// </summary>
         public  long? AdminstractiveClassBackupId { get; set; }
 
-
+ 
+        public string Address { get; set; }
 
 
         public virtual AdministrativeClassBackup AdminstractiveClassBackup { get; set; }

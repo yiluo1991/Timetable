@@ -73,6 +73,7 @@ namespace Timetable.DbContext.Models
         /// </summary>
         public StudentState StudentState { get; set; }
 
+        public DateTime CreateTime { get; set; }
 
 
         public virtual College College { get; set; }

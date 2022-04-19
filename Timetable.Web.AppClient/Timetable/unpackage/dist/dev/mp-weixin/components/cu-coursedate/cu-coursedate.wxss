@@ -1,0 +1,12 @@
+.course.mini {
+  margin-bottom: 10rpx;
+  border: 1px solid #eee;
+}
+.course.mini .courseinfo {
+  margin: 0;
+}
+.course.mini .courseinfo .coursetitle {
+  margin: 0rpx 10rpx;
+  color: #000;
+}
+

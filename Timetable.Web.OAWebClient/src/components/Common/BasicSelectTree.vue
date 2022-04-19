@@ -108,7 +108,7 @@ export default {
             }
         },
         width: {
-            type: Number,
+            type:[String, Number],
             default() {
                 return 250;
             }

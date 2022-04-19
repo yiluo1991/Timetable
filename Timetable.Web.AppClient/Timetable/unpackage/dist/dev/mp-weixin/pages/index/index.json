@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "智慧课表",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "cu-custom": "/components/cu-custom/cu-custom",
+    "cu-coursedate": "/components/cu-coursedate/cu-coursedate"
+  }
+}
